@@ -3,8 +3,9 @@ class User < ApplicationRecord
     :message => "Invalid email format." }
   validates :email, uniqueness: { message: 'An account with that email already exists.'}
   has_secure_password
-  validates :password, confirmation: { message: 'The two passwords do not match.'}
-	validates :password_confirmation, presence: { message: 'Please confirm password.'}
+  validates :password, confirmation: { message: 'The two passwords do not match.'}, :unless => Proc.new { |user| user.password_digest }
+	validates :password_confirmation, presence: { message: 'Please confirm password.'}, :unless => Proc.new { |user| user.password_digest }
+	enum role: [:standard,:moderator,:admin]
 	#devise :omniauthable, omniauth_providers: [:google_oauth2]
 
 	def self.login(params)
