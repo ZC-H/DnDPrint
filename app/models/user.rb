@@ -6,7 +6,7 @@ class User < ApplicationRecord
   validates :password, confirmation: { message: 'The two passwords do not match.'}, :unless => Proc.new { |user| user.password_digest }
 	validates :password_confirmation, presence: { message: 'Please confirm password.'}, :unless => Proc.new { |user| user.password_digest }
 	enum role: [:standard,:moderator,:admin]
-	#devise :omniauthable, omniauth_providers: [:google_oauth2]
+	has_many	:sheets
 
 	def self.login(params)
 		user = User.find_by(email: params['email'])
