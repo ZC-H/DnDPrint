@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 20180130113840) do
     t.string "race"
     t.string "gender"
     t.string "background"
-    t.string "class"
+    t.string "classes"
     t.integer "hp"
     t.integer "level"
     t.integer "initiative"

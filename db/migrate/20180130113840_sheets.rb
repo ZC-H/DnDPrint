@@ -5,7 +5,7 @@ class Sheets < ActiveRecord::Migration[5.1]
      	t.string :race
      	t.string :gender
      	t.string :background
-     	t.string :class #Currently only one class is allowed, to be expanded later
+     	t.string :classes #Currently only one class is allowed, to be expanded later
      	t.integer :hp
      	t.integer :level
      	t.integer :initiative

@@ -29,7 +29,7 @@ class SheetsController < ApplicationController
 
 	private
 	def sheet_params
-		params.require(:sheet).permit(:name, :class, :level, :race)
+		params.require(:sheet).permit(:name, :classes, :level, :race)
 	end
 
 end
