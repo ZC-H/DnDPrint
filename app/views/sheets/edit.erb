@@ -1,0 +1,11 @@
+<h1>Edit Sheet</h1>
+
+<%= form_for @sheet, :method => :put do |f| %>
+	<%= render partial: "form", :locals => {:f => f} %>
+
+  <p>
+    <%= f.submit "Edit Sheet", :class => 'btn btn-primary btn-lg' %>
+  </p>
+    
+	
+<% end %>
