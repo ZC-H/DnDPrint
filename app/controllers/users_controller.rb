@@ -17,18 +17,28 @@ class UsersController < ApplicationController
 	end
 
 	def sign_in
+		#Intentionally blank: See sign_in_check
+	end
+
+	def sign_out
+		session.clear
+		redirect_to '/'
 	end
 
 	def sign_in_check
-		p "AAAAAAAAAAAAAAAAAAA"
-		p params
 		id = User.login(params)
 		if id
 			session[:user_id] = id
 			redirect_to '/'
 		else
-			redirect '/sign_in'
+			redirect_to '/sign_in'
 		end
+	end
+
+	def google
+		user_id = User.googleaccount(request.env["omniauth.auth"])
+		session[:user_id] = user_id
+		redirect_to '/'
 	end
 
 

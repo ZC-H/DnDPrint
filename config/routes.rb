@@ -4,4 +4,6 @@ Rails.application.routes.draw do
   get "/sign_up" => "users#new", as: "sign_in"
   get "/sign_in" => "users#sign_in"
   post "/sign_in" => "users#sign_in_check"
+  post "/sign_out" => "users#sign_out"
+  get "auth/:provider/callback" => "users#google"
 end
