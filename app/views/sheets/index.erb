@@ -4,8 +4,12 @@
 <%= form_tag('/sheetsearch', remote: true, id: "sheet-search-form") do |f| %>
 	Class:
 	<%= text_field_tag('classes') %><br>
+	Race:
+	<%= text_field_tag('race') %><br>
 	Level:
 	<%= number_field_tag('level') %><br>
+	Level range:
+	<%= number_field_tag('min_level') %> to <%= number_field_tag('max_level') %><br>
 	<%= submit_tag 'Search', {id: 'sheets-search-btn'} %>
 <% end %>
 <br>
