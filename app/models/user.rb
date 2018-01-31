@@ -10,7 +10,7 @@ class User < ApplicationRecord
 
 	def self.login(params)
 		user = User.find_by(email: params['email'])
-		return nil if user.password_digest == nil
+		return nil if !user or user.password_digest == nil
 		if user && user.authenticate(params['password'])
 			return user.id
 		else

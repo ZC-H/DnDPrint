@@ -20,13 +20,22 @@ class UsersController < ApplicationController
 		end
 	end
 
+	def show
+	end
+
+	def edit
+	end
+
+	def update
+	end
+
 	def sign_in
 		#Intentionally blank: See sign_in_check
 	end
 
 	def sign_out
 		session.clear
-		redirect_to '/'
+		redirect_to sign_in_path
 	end
 
 	def sign_in_check
@@ -35,6 +44,7 @@ class UsersController < ApplicationController
 			session[:user_id] = id
 			redirect_to '/'
 		else
+			flash[:error] = "Invalid user details."
 			redirect_to '/sign_in'
 		end
 	end
