@@ -1,4 +1,16 @@
 <h1>Sheets</h1>
-<% @sheets.each do |s| %>
-	<%= render "sheetcard", sheet: s %>
+
+<h3>Search</h3>
+<%= form_tag('/sheetsearch', remote: true, id: "sheet-search-form") do |f| %>
+	Class:
+	<%= text_field_tag('classes') %><br>
+	Level:
+	<%= number_field_tag('level') %><br>
+	<%= submit_tag 'Search', {id: 'sheets-search-btn'} %>
 <% end %>
+<br>
+<div id="search-results" >
+	<% @sheets.each do |s| %>
+		<%= render "sheetcard", sheet: s %>
+	<% end %>
+</div>

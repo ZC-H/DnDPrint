@@ -20,11 +20,30 @@ class SheetsController < ApplicationController
 	def show
 	end
 
+	def search
+		p "Yeah"
+		@sheets = Sheet.filter(params.slice(:classes, :level, :race, :player, :min_level, :max_level))
+		respond_to do |f|
+			f.js
+		end
+	end
+
 	def index
-		@sheets = Sheet.all
+		p "AAAAAAAAa"
+		p params
+		@sheets = Sheet.filter(params.slice(:classes, :level, :race, :player, :min_level, :max_level))
 	end
 
 	def edit
+	end
+
+	def update
+  	if @sheet.update_attributes(sheet_params)
+      redirect_to @sheet
+    else
+    	flash[:danger] = "Error updating sheet"
+      render 'edit'
+    end
 	end
 
 	private
