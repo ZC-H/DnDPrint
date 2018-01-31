@@ -1,0 +1,2 @@
+$("#search-results").html("");
+$("#search-results").prepend('<% @sheets.each do |s| %> <%= j render("sheetcard", sheet: s) %> <% end %>')
