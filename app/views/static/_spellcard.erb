@@ -1,0 +1,27 @@
+<div class="panel panel-info">
+	<div class="panel-heading"><%=  spell != 0 ? spell['name'] : "No Spell Found" %></div>
+  <div class="panel-body">
+  	<div class="row">
+  		<div class="col-xs-7">
+  			<% if spell != 0 %>
+  				<% ['range','duration','components','material','ritual','concentration','casting_time','level'].each do |param| %>
+  				<b><%= param.titleize %></b> : <%= spell[param] %><br>
+  				<% end %><br>
+
+	  			<b>Description:</b><br><% spell['desc'].each do |desc| %>
+		  				<%= desc %><br>
+		  		<% end %>
+		  		
+	  			<% if spell['higher_level'] %>
+
+		  			<b>At Higher Levels:</b><br><% spell['higher_level'].each do |hl| %>
+		  				<%= hl %>
+		  			<% end %>
+		  		<% end %>
+	  		<% else %>
+	  			Error: No results found.
+	  		<% end %>
+	 	  </div>
+	 	</div>
+  </div>
+</div>

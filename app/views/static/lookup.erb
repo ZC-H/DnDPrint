@@ -1,0 +1,10 @@
+<h1>5e Spell Lookup</h1>
+<i>Powered by <a href="http://www.dnd5eapi.co/">DnD 5e API</a></i>
+
+<br>
+<%= form_tag('/lookup', method: "post", remote: true, id: "sheet-search-form") do |f| %>
+<%= text_field_tag('spell-query') %><br>
+<%= submit_tag 'Search' %>
+<% end %>
+
+<div id="spell-results" class="container">Hi</div>
