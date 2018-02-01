@@ -76,8 +76,8 @@ RSpec.describe User, type: :model do
       expect {User.login}.to raise_error(ArgumentError)
     end
 
-    it "allows proper user login and returns user ID" do
-      expect(User.login({'email' => user1.email, 'password' => "aaaa"}) ).to eq user1.id
+    it "allows proper user login and returns user" do
+      expect(User.login({'email' => user1.email, 'password' => "aaaa"}) ).to eq user1
     end
 
     it "rejects users with incorrect passwords" do

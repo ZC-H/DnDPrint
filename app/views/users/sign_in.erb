@@ -2,8 +2,14 @@
 
   Email: <%= text_field_tag :email %><br>
   Password: <%= password_field_tag :password %><br>
+  <div class="field">
+  	<%= check_box_tag :remember_me, 1 %>
+  	<%= label_tag	:remember_me %>
+  </div>
   <%= submit_tag "Submit" %>
 
 <% end %>
 
+<%= link_to "Sign up for an account", "/sign_up" %>
+<br>
 <%= link_to "Sign in with Google", "/auth/google_oauth2", id: "sign_in" %>

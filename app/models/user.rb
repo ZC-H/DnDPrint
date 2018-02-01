@@ -8,12 +8,17 @@ class User < ApplicationRecord
 	validates :password_confirmation, presence: true, :unless => Proc.new { |user| user.password_digest }
 	enum role: [:standard,:moderator,:admin]
 	has_many	:sheets, dependent: :destroy
+	before_create { generate_auth_token }
+
+	def generate_auth_token
+		self.auth_token = SecureRandom.urlsafe_base64
+	end
 
 	def self.login(params)
 		user = User.find_by(email: params['email'])
 		return nil if !user or user.password_digest == nil
 		if user && user.authenticate(params['password'])
-			return user.id
+			return user
 		else
 			return nil
 		end
