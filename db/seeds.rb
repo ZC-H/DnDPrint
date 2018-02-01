@@ -40,7 +40,15 @@ ActiveRecord::Base.transaction do
   	sheet['name'] = random_name + " " + random_name
   	sheet['classes'] = ["Artificer","Barbarian","Bard","Cleric","Druid","Fighter","Monk","Mystic","Paladin","Ranger","Rogue","Sorcerer","Warlock","Wizard"].sample
   	sheet['race'] = ["Human","Elf","Dwarf","Half-Elf","Tiefling","Aasimar","Aarakocra"].sample
+    sheet['abilityscores'] = {}
+    ['str','dex','con','int','wis','cha'].each do |s|
+      rolls = [1+rand(6),1+rand(6),1+rand(6),1+rand(6)]
+      rolls.delete(rolls.min)
+      sheet['abilityscores'][s] = rolls.inject(:+)
+    end
   	sheet['user_id'] = uids.sample
-  	Sheet.create(sheet)
+  	a = Sheet.create(sheet)
+    a.autocalc_all
+    a.save
   end
 end

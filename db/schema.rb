@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 20180201190350) do
     t.integer "level"
     t.integer "initiative"
     t.integer "ac"
+    t.integer "profbonus"
     t.text "abilityscores"
     t.text "saves"
     t.text "skillmods"
@@ -34,7 +35,6 @@ ActiveRecord::Schema.define(version: 20180201190350) do
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "profbonus"
     t.index ["user_id"], name: "index_sheets_on_user_id"
   end
 
