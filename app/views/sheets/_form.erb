@@ -1,8 +1,59 @@
+
+
 <%= f.label "Character name:" %><br>
-<%= f.text_field :name %><br><br>
-<%= f.label "Class:" %><br>
-<%= f.text_field :classes %><br>
-<%= f.label "Race:" %><br>
-<%= f.text_field :race %><br>
-<%= f.label "Level:" %><br>
-<%= f.number_field :level %><br>
+<div class="row">
+	<div class="col-md-5">
+		<%= f.text_field :name, class: "form-control input-lg" %><br>
+	</div>
+</div>
+
+<div class="container">
+	<div class="panel panel-primary">
+		<div class="panel-heading">Main Info</div>
+	  <div class="panel-body">
+	  	<div class="row">
+	  		<div class="col-xs-3">
+					<%= f.label "Class:" %><br>
+					<%= f.text_field :classes %><br>
+		 	  </div>
+		 	  <div class="col-xs-3">
+		 	  	<%= f.label "Race:" %><br>
+					<%= f.text_field :race %><br>
+					<%= f.label "Gender:" %><br>
+					<%= f.text_field :gender %>
+		 	  </div>
+		 	  <div class="col-xs-3">
+					<%= f.label "Level:" %><br>
+					<%= f.number_field :level %>
+				</div>
+		 	</div>
+	  </div>
+	</div>
+
+	<div class="panel panel-primary">
+		<div class="panel-heading">Ability Scores</div>
+	  <div class="panel-body">
+	  	<div class="row">
+	  		<div class="col-xs-3">
+					<%= f.label "Strength:" %><br>
+					<input type="number" name="sheet[abilityscores][str]"><br>
+					<%= f.label "Intelligence:" %><br>
+					<input type="number" name="sheet[abilityscores][int]"><br>
+		 	  </div>
+		 	  <div class="col-xs-3">
+		 	  	<%= f.label "Dexterity:" %><br>
+					<%= f.number_field :level %><br>
+					<%= f.label "Wisdom:" %><br>
+					<%= f.number_field :level %>
+		 	  </div>
+		 	  <div class="col-xs-3">
+					<%= f.label "Constitution:" %><br>
+					<%= f.number_field :level %><br>
+					<%= f.label "Charisma:" %><br>
+					<%= f.number_field :level %>
+				</div>
+		 	</div>
+	  </div>
+	</div>
+
+</div>

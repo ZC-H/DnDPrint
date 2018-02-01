@@ -1,0 +1,7 @@
+<h1>My Character Sheets</h1>
+<%= link_to '[New Character Sheet]', new_sheet_path %>
+<div>
+	<% @sheets.each do |s| %>
+		<%= render "sheets/sheetcard", sheet: s %>
+	<% end %>
+</div>

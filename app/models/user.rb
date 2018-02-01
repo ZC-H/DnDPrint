@@ -1,16 +1,17 @@
 class User < ApplicationRecord
+	validates :email, presence: true
 	validates :email,	:format => { :with => /.+@.+\..+.+/,
     :message => "Invalid email format." }
-  validates :email, uniqueness: { message: 'An account with that email already exists.'}
+  validates :email, uniqueness: true
   has_secure_password
-  validates :password, confirmation: { message: 'The two passwords do not match.'}, :unless => Proc.new { |user| user.password_digest }
-	validates :password_confirmation, presence: { message: 'Please confirm password.'}, :unless => Proc.new { |user| user.password_digest }
+  validates :password, confirmation: true, :unless => Proc.new { |user| user.password_digest }
+	validates :password_confirmation, presence: true, :unless => Proc.new { |user| user.password_digest }
 	enum role: [:standard,:moderator,:admin]
-	has_many	:sheets
+	has_many	:sheets, dependent: :destroy
 
 	def self.login(params)
 		user = User.find_by(email: params['email'])
-		return nil if user.password_digest == nil
+		return nil if !user or user.password_digest == nil
 		if user && user.authenticate(params['password'])
 			return user.id
 		else

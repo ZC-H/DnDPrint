@@ -5,10 +5,18 @@ class SheetsController < ApplicationController
 	end
 
 	def new
+		if !allowed?(level: 1)
+			flash[:error] = "You must log in first."
+			redirect_to sheets_path
+		end
 		@sheet = Sheet.new
 	end
 
 	def create
+		if !allowed?(level: 1)
+			flash[:error] = "You must log in first."
+			redirect_to sheets_path
+		end
 		@sheet = current_user.sheets.new(sheet_params)
 	  if @sheet.save
 	    redirect_to @sheet
@@ -21,7 +29,6 @@ class SheetsController < ApplicationController
 	end
 
 	def search
-		p "Yeah"
 		@sheets = Sheet.filter(params.slice(:classes, :level, :race, :player, :min_level, :max_level))
 		respond_to do |f|
 			f.js
@@ -29,26 +36,34 @@ class SheetsController < ApplicationController
 	end
 
 	def index
-		p "AAAAAAAAa"
-		p params
 		@sheets = Sheet.filter(params.slice(:classes, :level, :race, :player, :min_level, :max_level))
 	end
 
 	def edit
+		if !allowed?(level: 1.5, id: @sheet.user_id)
+			flash[:error] = "You are not authorised to edit this sheet."
+			redirect_to sheets_path
+		end
 	end
 
 	def update
+		p sheet_params
+		if !allowed?(level: 1.5, id: @sheet.user_id)
+			flash[:error] = "You are not authorised to edit this sheet."
+			redirect_to sheets_path
+		end
+		
   	if @sheet.update_attributes(sheet_params)
       redirect_to @sheet
     else
-    	flash[:danger] = "Error updating sheet"
+    	flash[:error] = "Error updating sheet"
       render 'edit'
     end
 	end
 
 	private
 	def sheet_params
-		params.require(:sheet).permit(:name, :classes, :level, :race)
+		params.require(:sheet).permit(:name, :classes, :level, :race, :gender, abilityscores:{})
 	end
 
 end
