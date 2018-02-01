@@ -24,12 +24,32 @@ class UsersController < ApplicationController
 	end
 
 	def edit
+		
 	end
 
 	def update
+		if !allowed?(level: 1.5, id: @user.id)
+			flash[:error] = "You are not authorised to edit this profile."
+			redirect_to sheets_path
+		end
+
+  	if @user.update_attributes(user_params)
+      redirect_to @user
+    else
+    	msg = "Error updating profile."
+    	 @user.errors.full_messages.each do |attribute, message|
+    		msg += " " + attribute + "."
+    	end
+    	flash[:error] = msg
+      redirect_to @user
+    end
 	end
 
 	def mysheets
+		if !allowed?(level: 1)
+			flash[:error] = "You must be logged in to access this page."
+			redirect_to sheets_path
+		end
 		@sheets = Sheet.where(user_id: current_user.id)
 	end
 	
