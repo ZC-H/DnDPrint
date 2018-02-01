@@ -29,19 +29,10 @@ class Sheet < ApplicationRecord
 	end
 
 	def calc_profbonus
-		case level.to_i
-		when 0..4
-			self.profbonus = 2
-		when 5..8
-			self.profbonus = 3
-		when 9..12
-			self.profbonus = 4
-		when 13..16
-			self.profbonus = 5
-		when 17..100
-			self.profbonus = 6
+		if level.to_i > 0
+			self.profbonus = 2 + (level-1)/4
 		end
 	end
 
-	
+
 end
