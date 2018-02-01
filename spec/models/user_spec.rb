@@ -24,7 +24,7 @@ RSpec.describe User, type: :model do
 
     # happy_path
     describe "can be created when all attributes are present" do
-      When(:user) { User.create(
+      When(:user) { User.new(
         name: "Salad Mayo",
         email: "salad@mayo.net",
         password: "aaaa",
@@ -36,13 +36,13 @@ RSpec.describe User, type: :model do
     # unhappy_path
 
     describe "cannot be created without an email" do
-      When(:user) { User.create(name: "Green Onion", password: "aaaa", password_confirmation: "aaaa") }
+      When(:user) { User.new(name: "Green Onion", password: "aaaa", password_confirmation: "aaaa") }
       Then { user.valid? == false }
     end
 
 
     describe "cannot be created without a password" do
-      When(:user) { User.create(name: "Green Onion", email: "green@onion.slice") }
+      When(:user) { User.new(name: "Green Onion", email: "green@onion.slice") }
       Then { user.valid? == false }
     end
 

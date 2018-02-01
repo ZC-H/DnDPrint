@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources	:sheets
   root 'sheets#index'
   post "/sheetsearch" => "sheets#search"
+  get "/mysheets" => "users#mysheets"
   get "/sign_up" => "users#new", as: "sign_up"
   get "/sign_in" => "users#sign_in"
   post "/sign_in" => "users#sign_in_check"

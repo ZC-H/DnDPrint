@@ -7,13 +7,15 @@
 	Race:
 	<%= text_field_tag('race') %><br>
 	Level:
-	<%= number_field_tag('level') %><br>
+	<%= number_field_tag('level') %><br><br>
 	Level range:
-	<%= number_field_tag('min_level') %> to <%= number_field_tag('max_level') %><br>
+	<div class="form-group row">
+		<div class="col-xs-1 text-center"> Between </div><%= number_field_tag('min_level',nil,class: "col-xs-1") %><div class="col-xs-1 text-center"> and </div><%= number_field_tag('max_level',nil,class: "col-xs-1") %>
+	</div><br>
 	<%= submit_tag 'Search', {id: 'sheets-search-btn'} %>
 <% end %>
 <br>
-<div id="search-results" >
+<div id="search-results" class="container">
 	<% @sheets.each do |s| %>
 		<%= render "sheetcard", sheet: s %>
 	<% end %>

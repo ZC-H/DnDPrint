@@ -1,7 +1,7 @@
 class Sheet < ApplicationRecord
 	include Filterable
 	belongs_to	:user
-	validates	:level, numericality: { greater_than: 0, less_than: 20 }
+	validates	:level, numericality: { greater_than: 0, less_than: 21 }, :if => Proc.new { |m| m.level != nil }
 	scope :level, -> (level) { where level: level }
 	scope :classes, -> (classes) { where classes: classes }
 	scope :race, -> (race) { where race: race }

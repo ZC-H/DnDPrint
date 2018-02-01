@@ -1,10 +1,13 @@
-<div class="panel panel-default">
+<div class="panel panel-info">
+	<div class="panel-heading"><a href = <%= sheet_path(sheet) %> ><%=  sheet.name != "" ? sheet.name : "Unnamed Sheet" %></a></div>
   <div class="panel-body">
   	<div class="row">
   		<div class="col-xs-7">
-  			<a href = <%= sheet_path(sheet) %> ><h3><%= sheet.name %></h3></a>
-  			<br><%= sheet.race %> <%= sheet.classes %>, Level <%= sheet.level %><br>
-				Player: <%= sheet.user.name %>
+  			<%= sheet.race %> <%= sheet.classes %>, Level <%= sheet.level %><br>
+				Player: <%= sheet.user.name %><br>
+				<% if sheet.user == current_user %>
+				<%= link_to '[Edit Character]', edit_sheet_path(sheet.id) %>
+				<% end %>
 	 	  </div>
 	 	</div>
   </div>

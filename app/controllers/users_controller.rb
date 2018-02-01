@@ -29,6 +29,10 @@ class UsersController < ApplicationController
 	def update
 	end
 
+	def mysheets
+		@sheets = Sheet.where(user_id: current_user.id)
+	end
+	
 	def sign_in
 		#Intentionally blank: See sign_in_check
 	end
