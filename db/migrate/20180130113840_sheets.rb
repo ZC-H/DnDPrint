@@ -11,12 +11,12 @@ class Sheets < ActiveRecord::Migration[5.1]
      	t.integer :level
      	t.integer :initiative
      	t.integer :ac
-     	t.text	:abilityscores, array: true, default: [nil,nil,nil,nil,nil,nil]
-     	t.text	:saveprofs, array: true, default: []
-     	t.text	:skillmods, array: true, default: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-     	t.text	:skillprofs, array: true, default: []
-     	t.text	:classfeatures, array: true, default: []
-     	t.text	:attacks, array: true, default: []
+      t.integer :profbonus
+     	t.text	:abilityscores
+     	t.text	:saves
+     	t.text	:skillmods
+      t.text	:classfeatures
+     	t.text	:attacks
       t.belongs_to	:user
       t.timestamps
     end

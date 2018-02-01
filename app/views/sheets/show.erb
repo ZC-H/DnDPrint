@@ -1,3 +1,7 @@
 <%= @sheet.name %><br>
 <%= @sheet.race %> <%= @sheet.classes %>, Level <%= @sheet.level %><br>
 Player: <%= @sheet.user.name %>
+<br><br>
+<% if @sheet.user == current_user %>
+<%= link_to '[Edit Character]', edit_sheet_path(@sheet.id) %>
+<% end %>

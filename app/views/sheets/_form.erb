@@ -15,6 +15,8 @@
 	  		<div class="col-xs-3">
 					<%= f.label "Class:" %><br>
 					<%= f.text_field :classes %><br>
+					<%= f.label "Background:" %><br>
+					<%= f.text_field :background %>
 		 	  </div>
 		 	  <div class="col-xs-3">
 		 	  	<%= f.label "Race:" %><br>
@@ -24,7 +26,9 @@
 		 	  </div>
 		 	  <div class="col-xs-3">
 					<%= f.label "Level:" %><br>
-					<%= f.number_field :level %>
+					<%= f.number_field :level %><br>
+					<%= f.label "Campaign:" %><br>
+					<%= f.text_field :campaign %>
 				</div>
 		 	</div>
 	  </div>
@@ -34,23 +38,61 @@
 		<div class="panel-heading">Ability Scores</div>
 	  <div class="panel-body">
 	  	<div class="row">
-	  		<div class="col-xs-3">
+	  		<div class="col-xs-4">
 					<%= f.label "Strength:" %><br>
-					<input type="number" name="sheet[abilityscores][str]"><br>
+					<input type="number" name="sheet[abilityscores][str]" value=<%=@sheet.abilityscores['str'] %> > 
+					<input type="number" name="sheet[abilityscores][str-mod]" class="small-input autocalc" value=<%=@sheet.abilityscores['str-mod'] %>  > 
+					<br>
 					<%= f.label "Intelligence:" %><br>
-					<input type="number" name="sheet[abilityscores][int]"><br>
+					<input type="number" name="sheet[abilityscores][int]" value=<%=@sheet.abilityscores['int'] %> >
+					<input type="number" name="sheet[abilityscores][int-mod]" class="small-input autocalc" value=<%=@sheet.abilityscores['int-mod'] %>  >
+					<br>
 		 	  </div>
-		 	  <div class="col-xs-3">
+		 	  <div class="col-xs-4">
 		 	  	<%= f.label "Dexterity:" %><br>
-					<%= f.number_field :level %><br>
+		 	  	<input type="number" name="sheet[abilityscores][dex]" value=<%=@sheet.abilityscores['dex'] %> >
+		 	  	<input type="number" name="sheet[abilityscores][dex-mod]" class="small-input autocalc" value=<%=@sheet.abilityscores['dex-mod'] %>  >
+		 	  	<br>
 					<%= f.label "Wisdom:" %><br>
-					<%= f.number_field :level %>
+					<input type="number" name="sheet[abilityscores][wis]" value=<%=@sheet.abilityscores['wis'] %> >
+					<input type="number" name="sheet[abilityscores][wis-mod]" class="small-input autocalc" value=<%=@sheet.abilityscores['wis-mod'] %>  >
+					<br>
+		 	  </div>
+		 	  <div class="col-xs-4">
+					<%= f.label "Constitution:" %><br>
+					<input type="number" name="sheet[abilityscores][con]" value=<%=@sheet.abilityscores['con'] %> >
+					<input type="number" name="sheet[abilityscores][con-mod]" class="small-input autocalc" value=<%=@sheet.abilityscores['con-mod'] %>  >
+					<br>
+					<%= f.label "Charisma:" %><br>
+					<input type="number" name="sheet[abilityscores][cha]" value=<%=@sheet.abilityscores['cha'] %> >
+					<input type="number" name="sheet[abilityscores][cha-mod]" class="small-input autocalc" value=<%=@sheet.abilityscores['cha-mod'] %>  >
+					<br>
+				</div>
+		 	</div>
+	  </div>
+	</div>
+
+	<div class="panel panel-primary">
+		<div class="panel-heading">Main Stats</div>
+	  <div class="panel-body">
+	  	<div class="row">
+	  		<div class="col-xs-3">
+					<%= f.label "HP:" %><br>
+					<%= f.number_field :hp %><br>
+					<%= f.label "Hit Dice:" %><br>
+					<input type="text">
 		 	  </div>
 		 	  <div class="col-xs-3">
-					<%= f.label "Constitution:" %><br>
-					<%= f.number_field :level %><br>
-					<%= f.label "Charisma:" %><br>
-					<%= f.number_field :level %>
+		 	  	<%= f.label "Armor Class:" %><br>
+					<%= f.number_field :ac %><br>
+					<%= f.label "Initiative:" %><br>
+					<%= f.text_field :initiative %>
+		 	  </div>
+		 	  <div class="col-xs-3">
+					<%= f.label "Proficiency Bonus:" %><br>
+					<%= f.number_field :profbonus, class: "autocalc" %><br>
+					<%= f.label "Speed:" %><br>
+					<input type="text">
 				</div>
 		 	</div>
 	  </div>
