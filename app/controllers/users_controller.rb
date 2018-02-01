@@ -82,8 +82,8 @@ class UsersController < ApplicationController
 	end
 
 	def google
-		user_id = User.googleaccount(request.env["omniauth.auth"])
-		cookies[:auth_token] = @user.auth_token
+		user = User.googleaccount(request.env["omniauth.auth"])
+		cookies[:auth_token] = user.auth_token
 		redirect_to '/'
 	end
 

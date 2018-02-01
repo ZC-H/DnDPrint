@@ -34,6 +34,6 @@ class User < ApplicationRecord
     	user.name = params['name']
     	user.save(validate: false)
     end
-    user.id
+    user
 	end
 end
