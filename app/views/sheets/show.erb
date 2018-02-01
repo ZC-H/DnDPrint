@@ -1,3 +1,26 @@
 <%= @sheet.name %><br>
-<%= @sheet.race %> <%= @sheet.classes %>, Level <%= @sheet.level %><br>
+<%= @sheet.race %> <%= @sheet.classes %> <br>
+ Level <%= @sheet.level %><br>
+ <b>Background:</b> <%= @sheet.background %><br>
+ <b>Campaign:</b> <%= @sheet.campaign %><br>
+
 Player: <%= @sheet.user.name %>
+
+<div class="row"><div class="col-md-2">
+	<table class="table table-striped">
+	  <tbody>
+      <% ['str','dex','con','int','wis','cha'].each do |s| %>
+      	<tr>
+	      	<td><b><%= s.upcase %></b></td>
+	      	<td><%= @sheet.abilityscores[s] %></td>
+	      	<td><%= @sheet.abilityscores[s+'-mod'].to_i > 0 ? "+" + @sheet.abilityscores[s+'-mod'].to_s : @sheet.abilityscores[s+'-mod'] %></td>
+	      </tr>
+      <% end %>
+	  </tbody>
+	</table>
+</div></div>
+
+<br><br>
+<% if @sheet.user == current_user || current_user.moderator? %>
+	<%= link_to '[Edit Character]', edit_sheet_path(@sheet.id) %>
+<% end %>

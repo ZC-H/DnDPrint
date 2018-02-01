@@ -47,23 +47,25 @@ class SheetsController < ApplicationController
 	end
 
 	def update
-		p sheet_params
 		if !allowed?(level: 1.5, id: @sheet.user_id)
 			flash[:error] = "You are not authorised to edit this sheet."
 			redirect_to sheets_path
 		end
-		
+
   	if @sheet.update_attributes(sheet_params)
+  		@sheet.autocalc_all
+  		@sheet.save
       redirect_to @sheet
     else
     	flash[:error] = "Error updating sheet"
-      render 'edit'
+      redirect_to '/'
     end
 	end
 
 	private
 	def sheet_params
-		params.require(:sheet).permit(:name, :classes, :level, :race, :gender, abilityscores:{})
+		params.require(:sheet).permit(:name, :classes, :level, :race, :gender, :background, :campaign, :hp, :ac, :initiative, :profbonus,
+		 abilityscores: {} )
 	end
 
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180130113840) do
+ActiveRecord::Schema.define(version: 20180201190350) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,21 +19,22 @@ ActiveRecord::Schema.define(version: 20180130113840) do
     t.string "name"
     t.string "race"
     t.string "gender"
+    t.string "campaign"
     t.string "background"
     t.string "classes"
     t.integer "hp"
     t.integer "level"
     t.integer "initiative"
     t.integer "ac"
-    t.text "abilityscores", default: [nil, nil, nil, nil, nil, nil], array: true
-    t.text "saveprofs", default: [], array: true
-    t.text "skillmods", default: ["0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0"], array: true
-    t.text "skillprofs", default: [], array: true
-    t.text "classfeatures", default: [], array: true
-    t.text "attacks", default: [], array: true
+    t.text "abilityscores"
+    t.text "saves"
+    t.text "skillmods"
+    t.text "classfeatures"
+    t.text "attacks"
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "profbonus"
     t.index ["user_id"], name: "index_sheets_on_user_id"
   end
 
@@ -44,6 +45,7 @@ ActiveRecord::Schema.define(version: 20180130113840) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "role"
+    t.string "auth_token"
   end
 
 end

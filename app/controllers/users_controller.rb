@@ -11,11 +11,15 @@ class UsersController < ApplicationController
 	def create
 		@user = User.new(user_params)
 		if @user.save
-			session[:user_id] = user.id
+			cookies[:auth_token] = @user.auth_token
 			redirect_to '/'
 		else
 			p @user.errors
-			flash[:danger] = @user.errors
+			msg = "Error signing up."
+    	 @user.errors.full_messages.each do |attribute, message|
+    		msg += " " + attribute + "."
+    	end
+    	flash[:error] = msg
 			redirect_to '/sign_up'
 		end
 	end
@@ -24,12 +28,32 @@ class UsersController < ApplicationController
 	end
 
 	def edit
+		
 	end
 
 	def update
+		if !allowed?(level: 1.5, id: @user.id)
+			flash[:error] = "You are not authorised to edit this profile."
+			redirect_to sheets_path
+		end
+
+  	if @user.update_attributes(user_params)
+      redirect_to @user
+    else
+    	msg = "Error updating profile."
+    	 @user.errors.full_messages.each do |attribute, message|
+    		msg += " " + attribute + "."
+    	end
+    	flash[:error] = msg
+      redirect_to @user
+    end
 	end
 
 	def mysheets
+		if !allowed?(level: 1)
+			flash[:error] = "You must be logged in to access this page."
+			redirect_to sheets_path
+		end
 		@sheets = Sheet.where(user_id: current_user.id)
 	end
 	
@@ -38,14 +62,18 @@ class UsersController < ApplicationController
 	end
 
 	def sign_out
-		session.clear
+		cookies.delete(:auth_token)
 		redirect_to sign_in_path
 	end
 
 	def sign_in_check
-		id = User.login(params)
-		if id
-			session[:user_id] = id
+		user = User.login(params)
+		if user
+			if params['remember_me']
+				cookies.permanent[:auth_token] = user.auth_token
+			else
+				cookies[:auth_token] = user.auth_token
+			end
 			redirect_to '/'
 		else
 			flash[:error] = "Invalid user details."
@@ -55,7 +83,7 @@ class UsersController < ApplicationController
 
 	def google
 		user_id = User.googleaccount(request.env["omniauth.auth"])
-		session[:user_id] = user_id
+		cookies[:auth_token] = @user.auth_token
 		redirect_to '/'
 	end
 
